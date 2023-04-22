@@ -1,0 +1,17 @@
+#Entities
+entity.subject.id=ID
+entity.subject.name=Название
+entity.registration.name=Имя
+entity.registration.surname=Фамилия
+#entity.request.schedule.get.firstWeek.name=isFirstWeek
+
+#Messages
+message.warn.valid.user.notfound=Пользователь не найден
+message.warn.convert.id=Не удалось преобразовать id к типу %s
+message.warn.convert.number.format=Не удалось преобразовать "%s" в число
+
+#Messages-Field
+message.warn.field.empty=Значение не должно быть пустым
+message.warn.field.duplicate=Произошло повторение данных
+message.warn.field.enum.notfound=Не удалось найти значение "%s", в "%s"
+message.warn.field.id.invalid=Значение меньше или равно нулю

@@ -1,0 +1,92 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/hak
+    username: postgres
+    password: postgres
+  jpa:
+    database-platform: org.hibernate.dialect.PostgresPlusDialect
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 285958268474-dtcuh1hl2j96d775o1mfj0p44o1ulkbh.apps.googleusercontent.com
+            clientSecret: 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
+            redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
+            scope:
+              - email
+              - profile
+          facebook:
+            clientId: 121189305185277
+            clientSecret: 42ffe5aa7379e8326387e0fe16f34132
+            redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
+            scope:
+              - email
+              - public_profile
+          github:
+            clientId: e03fa408f004d7043808
+            clientSecret: feaf75e039f4b90bf9b06b8c7693c87f19acaf3e
+            redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
+            scope:
+              - user:email
+              - read:user
+
+        provider:
+          facebook:
+            authorizationUri: https://www.facebook.com/v3.0/dialog/oauth
+            tokenUri: https://graph.facebook.com/v3.0/oauth/access_token
+            userInfoUri: https://graph.facebook.com/v3.0/me?fields=id,first_name,middle_name,last_name,name,email,verified,is_verified,picture.width(250).height(250)
+  jackson:
+    date-format: yyyy-MM-dd'T'HH:mm:ss.SSSZ
+
+server:
+  port: 8097
+  error:
+    include-stacktrace: never
+  tomcat:
+    relaxed-query-chars: "|,{,},[,]"
+  ssl:
+    port: 8096
+    enabled: false
+    key-store-type: PKCS12
+    key-store: classpath:certificate.p12
+    key-store-password: test
+    key-alias: test
+  forward-headers-strategy: native
+  servlet:
+    context-path: /api
+app:
+  auth:
+    tokenSecret: 04ca023b39512e46d0c2cf4b48d5aac61d34302994c87ed4eff225dcf3b0a218739f3897051a057f9b846a69ea2927a587044164b7bae5e1306219d50b588cb1
+    tokenRefreshSecret: bccf5501a15d9c5a4dca4d4d845ddd12b4429704b5ef0feadb2bf9d8724bc14040869d3852b2e7f2f865f55350033f3ea0f77b762856558b30ead116843cc617
+    tokenExpirationMsec: 6000000 #864000000 10 days
+    tokenRefreshExpirationMsec: 2592000000 # 30 days
+  cors:
+    allowedOrigins:
+    - http://localhost:3000
+    - http://localhost:8095
+    - http://10.2.0.100:7778
+    - http://api.kkep.site
+    - http://kkep.site
+    - http://api.kkep.su
+    - http://kkep.su
+    - https://api.kkep.su
+    - https://kkep.su
+  oauth2:
+    # After successfully authenticating with the OAuth2 Provider,
+    # we'll be generating an auth token for the user and sending the token to the
+    # redirectUri mentioned by the client in the /oauth2/authorize request.
+    # We're not using cookies because they won't work well in mobile clients.
+    authorizedRedirectUris:
+      - http://kkep.site/oauth2/redirect
+      - http://kkep.su/oauth2/redirect
+      - https://kkep.su/oauth2/redirect
+      - http://localhost:8097/oauth2/redirect
+      - http://localhost:8098/oauth2/redirect
+      - http://localhost:3000/oauth2/redirect
+      - myandroidapp://oauth2/redirect
+      - myiosapp://oauth2/redirect
