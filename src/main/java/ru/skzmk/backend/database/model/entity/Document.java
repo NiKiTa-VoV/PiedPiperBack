@@ -25,10 +25,6 @@ public class Document implements IEntity<Integer> {
     Integer id;
 
     @NotBlank
-    @Column(name = "original_name", nullable = false)
-    String originalName;
-
-    @NotBlank
     @Column(name = "file_name", nullable = false)
     String fileName;
 }

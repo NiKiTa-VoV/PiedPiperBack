@@ -14,10 +14,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import ru.skzmk.backend.security.filter.TokenAuthenticationFilter;
-import ru.skzmk.backend.security.service.HttpCookieAuthorizationRequestRepository;
 import ru.skzmk.backend.security.service.RestAuthenticationEntryPoint;
 import ru.skzmk.backend.security.service.TokenProvider;
 import ru.skzmk.backend.security.service.UserDetailsServiceImpl;
@@ -33,8 +31,6 @@ import ru.skzmk.backend.security.service.UserDetailsServiceImpl;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsServiceImpl userDetailsServiceImpl;
-    private final HttpCookieAuthorizationRequestRepository httpCookieAuthorizationRequestRepository;
-    private final InMemoryClientRegistrationRepository clientRegistrationRepositoryCustom;
     private final RestAuthenticationEntryPoint restAuthenticationEntryPoint;
     private final TokenProvider tokenProvider;
 
@@ -87,7 +83,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/error", "/favicon.ico", "/**/*.png", "/**/*.gif", "/**/*.svg", "/**/*.jpg",
                         "/**/*.html", "/**/*.css", "/**/*.js")
                 .permitAll()
-                .antMatchers("/auth/**", "/oauth2/**", "/schedule/**")
+                .antMatchers("/auth/**", "/oauth2/**", "/resource/**", "/company/parse/*")
                 .permitAll().anyRequest().authenticated();
 
         // Add our custom Token based authentication filter

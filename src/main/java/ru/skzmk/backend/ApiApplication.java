@@ -13,6 +13,8 @@ public class ApiApplication {
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(ApiApplication.class, args);
 
+//        context.getBean(SheetReplacerService.class).replace10();
+
 //        I18n.init();
 
 //        context.getBean(ScheduleDefaultParseService.class).loadFiles();

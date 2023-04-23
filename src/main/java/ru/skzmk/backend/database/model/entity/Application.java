@@ -6,6 +6,7 @@ import ru.skzmk.backend.database.model.IEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
 @Getter
@@ -33,10 +34,10 @@ public class Application implements IEntity<Integer> {
     @Column(name = "description", nullable = false)
     String description;
 
-//    @NotNull
-//    @M(optional = false)
-//    @JoinColumn(name = "user_id", nullable = false)
-//    User user;
+    @NotNull
+    @OneToOne(optional = false)
+    @JoinColumn(name = "document_id", nullable = false)
+    Document document;
 
     @Positive
     @Column(name = "days", nullable = false)
